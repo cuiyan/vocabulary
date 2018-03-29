@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>苏菲的世界</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../mui/css/mui.min.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../mui/css/app.css"/>
+		<style>
+			.mui-table h4,.mui-table h5,.mui-table .mui-h5,.mui-table .mui-h6,.mui-table p{
+		        margin-top: 0;
+		    }
+		    .mui-table h4{
+		        line-height: 21px;
+		        font-weight: 500;
+		    }
+		
+		    .mui-table .oa-icon{
+		        position: absolute;
+		        right:0;
+		        bottom: 0;
+		    }
+		    .mui-table .oa-icon-star-filled{
+		        color:#f14e41;
+		    }
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">课程表</h1>
+		</header>
+		<div class="mui-content">
+		    <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed" id="timetableBlock">
+		        
+		    </ul>
+		</div>
+	</body>
+	<script src="../mui/js/mui.min.js"></script>
+	<script src="../js/common.js"></script>
+	<script src="../js/lib/jsrender.js"></script>
+	<script  id="timetableTmpl" type="text/x-jsrender">
+		<li class="mui-table-view-cell" id={{:id}}>
+		            <div class="mui-table" >
+		                <div class="mui-table-cell mui-col-xs-10">
+		                    <h4 class="mui-ellipsis">{{:chapterName}}</h4>
+		                    <p class="mui-h6 mui-ellipsis">page:{{:page}}</p>
+		                </div>
+		                <div class="mui-table-cell mui-col-xs-2 mui-text-right">
+		                    <span class="mui-h5">{{:dateTime}}</span>
+		                </div>
+		            </div>
+		        </li>
+    </script>
+	<script>
+		 mui.init({
+			swipeBack:true, //启用右滑关闭功能
+			preloadPages:[{
+			    id:'wordList.html',
+			    url:'wordList.html'           
+			  }
+			  ]
+		});
+	
+		
+		mui.post(baseurl+'timetable/selectByBookId',{
+			bookId: getUrlParam("bookId")
+		},function(data){
+			var $ = window.jsrender;                                   
+		    var markup = document.getElementById("timetableTmpl").innerHTML; 
+		    var tmpl = $.templates(markup);                           
+		    var html = tmpl.render(data);                             
+		    document.getElementById("timetableBlock").innerHTML = html;      
+		},'json'
+	);
+		
+		mui(".mui-table-view").on('tap','.mui-table-view-cell',function(){
+			  //获取id
+			  var id = this.getAttribute("id");
+			 //传值给详情页面，通知加载新数据
+			  mui.fire(wordList,'getWordList',{id:id});
+			  //打开新闻详情
+			  mui.openWindow({
+			    id:'wordList',
+			    url:'wordList.html'
+			  }); 
+			}) 
+	</script>
+</html>

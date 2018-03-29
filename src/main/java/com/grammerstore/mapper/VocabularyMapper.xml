@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grammerstore.mapper.VocabularyMapper">
+  <resultMap id="BaseResultMap" type="com.grammerstore.entity.Vocabulary">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="timetable_id" jdbcType="INTEGER" property="timetableId" />
+    <result column="word" jdbcType="VARCHAR" property="word" />
+    <result column="sentence" jdbcType="VARCHAR" property="sentence" />
+    <result column="phonetic_symbol" jdbcType="VARCHAR" property="phoneticSymbol" />
+    <result column="image_name" jdbcType="VARCHAR" property="imageName" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="english_paraphrase" jdbcType="VARCHAR" property="englishParaphrase" />
+    <result column="chinese_paraphrase" jdbcType="VARCHAR" property="chineseParaphrase" />
+  </resultMap>
+   <select id="selectWordsByTTId" resultMap="BaseResultMap">
+   	SELECT id,word,type,sentence,image_name FROM vocabulary WHERE timetable_id=#{timetableId}
+   	<if test="start!=null and rows!=null">
+   		LIMIT #{start},#{rows}
+   	</if>
+   </select>
+</mapper>

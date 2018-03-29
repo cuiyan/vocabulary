@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grammerstore.mapper.TimetableMapper">
+  <resultMap id="BaseResultMap" type="com.grammerstore.entity.Timetable">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="book_id" jdbcType="VARCHAR" property="bookId" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="chapter_name" jdbcType="VARCHAR" property="chapterName" />
+    <result column="page" jdbcType="VARCHAR" property="page" />
+  </resultMap>
+   <select id="selectByBookId" resultMap="BaseResultMap">
+   		SELECT id,book_id,chapter_name,page,time FROM timetable WHERE book_id=#{bookId} ORDER BY id
+   </select>
+</mapper>
