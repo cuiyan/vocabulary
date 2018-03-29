@@ -94,6 +94,7 @@ CREATE TABLE `vocabulary` (
 
 LOCK TABLES `vocabulary` WRITE;
 /*!40000 ALTER TABLE `vocabulary` DISABLE KEYS */;
+INSERT INTO `vocabulary` VALUES (1,1,'outskirts','As they approached the outskirts of the town they heard a few sporadic shots',NULL,'outskirts.jpg',NULL,'市郊','n.'),(2,1,'encircle','In some of the gardens the fruit trees were encircled with dense clusters of daffodils',NULL,'encircle.jpg',NULL,'环绕；围绕；包围','v.'),(3,1,'daffodil','In some of the gardens the fruit trees were encircled with dense clusters of daffodils',NULL,'daffodil.jpg',NULL,'黄水仙','n.');
 /*!40000 ALTER TABLE `vocabulary` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
