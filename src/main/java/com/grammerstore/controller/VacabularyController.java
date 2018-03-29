@@ -18,6 +18,7 @@ public class VacabularyController {
 	@RequestMapping(value="/vocabulary/selectWordsByTTId")
 	@ResponseBody
 	public List<Vocabulary> selectWordsByTTId(Integer timetableId,Integer page,Integer rows){
+		System.out.println("timetableId:"+timetableId+"==page:"+page+"==rows:"+rows);
 		return vocabularyService.selectWordsByTTId(timetableId,page,rows);
 	}
 }

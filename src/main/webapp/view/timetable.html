@@ -61,14 +61,10 @@
     </script>
 	<script>
 		 mui.init({
-			swipeBack:true, //启用右滑关闭功能
-			preloadPages:[{
-			    id:'wordList.html',
-			    url:'wordList.html'           
-			  }
-			  ]
+			swipeBack:true //启用右滑关闭功能
+			
 		});
-	
+			
 		
 		mui.post(baseurl+'timetable/selectByBookId',{
 			bookId: getUrlParam("bookId")
@@ -84,13 +80,10 @@
 		mui(".mui-table-view").on('tap','.mui-table-view-cell',function(){
 			  //获取id
 			  var id = this.getAttribute("id");
-			 //传值给详情页面，通知加载新数据
-			  mui.fire(wordList,'getWordList',{id:id});
 			  //打开新闻详情
 			  mui.openWindow({
-			    id:'wordList',
-			    url:'wordList.html'
+			    url:'wordList.html?ttId='+id
 			  }); 
-			}) 
+			}) ;
 	</script>
 </html>

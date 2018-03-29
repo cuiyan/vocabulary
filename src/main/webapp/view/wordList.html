@@ -19,21 +19,43 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title"></h1>
 		</header>
-		<div class="mui-content">
+		<div class="mui-content" id="wordList">
+			
+		</div>
+		<script src="../mui/js/mui.min.js"></script>
+		<script src="../js/lib/jsrender.js"></script>
+		<script src="../js/common.js"></script>
+		<script  id="wordTmpl" type="text/x-jsrender">
 			<div class="mui-card">
-				<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url(../images/cbd.jpg)"></div>
+				<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url(../images/word/{{:imageName}})"></div>
 				<div class="mui-card-content">
 					<div class="mui-card-content-inner">
-						<p style="color: #333;">这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
+						<p style="color: #333;">{{:word}}&nbsp;&nbsp;&nbsp;{{:type}}</p>
+						<p>{{:sentence}}</p>
 					</div>
 				</div>
 				<div class="mui-card-footer">
-					<a class="mui-card-link">Like</a>
-					<a class="mui-card-link">Read more</a>
+					<a class="mui-card-link">known</a>
+					<a class="mui-card-link">more</a>
 				</div>
 			</div>
-		</div>
-		<script src="../mui/js/mui.min.js"></script>
+		</script>
+		
+		<script type="text/javascript">
+		console.log(getUrlParam("ttId"));
+			mui.post(baseurl+'vocabulary/selectWordsByTTId',{
+				timetableId: getUrlParam("ttId"),
+				page:1,
+				rows:10
+			},function(data){
+				var $ = window.jsrender;                                   
+			    var markup = document.getElementById("wordTmpl").innerHTML; 
+			    var tmpl = $.templates(markup);                           
+			    var html = tmpl.render(data);                             
+			    document.getElementById("wordList").innerHTML = html;      
+			},'json'
+		);
+		</script>
 	</body>
 
 </html>
