@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.grammerstore.entity.Vocabulary;
 import com.grammerstore.service.VocabularyService;
@@ -21,4 +22,13 @@ public class VacabularyController {
 		System.out.println("timetableId:"+timetableId+"==page:"+page+"==rows:"+rows);
 		return vocabularyService.selectWordsByTTId(timetableId,page,rows);
 	}
+	
+	@RequestMapping(value="/manage/vocabulary-manage")
+	@ResponseBody
+	public ModelAndView vocabularyManager() {
+		System.out.println("-------");
+		return new ModelAndView("word-manager");
+	}
+	
 }
+

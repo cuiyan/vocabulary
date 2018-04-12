@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grammerstore.mapper.UserPhilosopherMapper">
+  <resultMap id="BaseResultMap" type="com.grammerstore.entity.DBUserPhilosopher">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="philosopher_name" jdbcType="VARCHAR" property="philosopherName" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+  </resultMap>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+  	select id,philosopher_name,user_name from user_philosopher 
+  </select>
+  
+  <insert id="addUserAndPhilosopher">
+  	insert into user_philosopher(philosopher_name,user_name) values(#{philosopherName},#{userName});
+  </insert>
+</mapper>

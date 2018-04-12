@@ -33,7 +33,14 @@
                 class="org.springframework.http.converter.ResourceHttpMessageConverter" />
         </mvc:message-converters>
     </mvc:annotation-driven>
-
+    
+    
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	   <!--  <property name="prefix" value="/manage/" />
+	     <property name="prefix" value="/table/" /> -->
+	    <property name="suffix" value=".jsp" />
+	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+	</bean> 
 
 
 
