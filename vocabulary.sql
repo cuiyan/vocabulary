@@ -108,3 +108,10 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2018-03-29 14:09:21
+
+
+CREATE TABLE `vocabulary`.`user_philosopher` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `philosopher_name` VARCHAR(45) NULL,
+  `user_name` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`))ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

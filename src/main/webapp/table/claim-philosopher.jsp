@@ -19,11 +19,11 @@
 		<form id="claimForm">
 		  <div class="form-group">
 		    <label for="exampleInputName2">哲学家</label>
-		    <input type="text" class="form-control" id="exampleInputName2" name="philosopherName" placeholder="苏格拉底">
+		    <input type="text" class="form-control" id="exampleInputName2" name="philosopherName" placeholder="请输入哲学家名称（中文/英文）">
 		  </div>
 		  <div class="form-group">
 		    <label for="exampleInputEmail2">认领者</label>
-		    <input type="email" class="form-control" id="exampleInputEmail2"  name="userName" placeholder="爱自由">
+		    <input type="email" class="form-control" id="exampleInputEmail2"  name="userName" placeholder="请输入认领者昵称">
 		  </div>
 		 	 <button type="submit" id="submit" class="btn btn-default ">确认认领</button>
 		</form>

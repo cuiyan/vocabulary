@@ -15,7 +15,7 @@
 	</head>
 
 	<body>
-		<h2>哲学家认领</h2>
+		<h2 class="text-center">哲学家认领</h2>
 		<div class="table-responsive">
 		  <table class="table">
 		  	<thead>
@@ -29,6 +29,10 @@
 				   		<td>${userPhilosopher.id}</td>
 				   		<td>${userPhilosopher.philosopherName}</td>
 				   		<td>${userPhilosopher.userName}</td>
+				   		<td>
+				   			<button id="modifyBtn" userPhilosopherId="${userPhilosopher.id}">修改</button>
+				   			<button id="writeBtn" userPhilosopherId="${userPhilosopher.id}">写文章</button>
+				   		</td>
 				   </tr>
 				</c:forEach>
 		    	</tbody>
@@ -40,4 +44,13 @@
 	</body>
 	
 	<script src="../bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/lib/jquery.min.js"></script>
+	<script>
+		$("#modifyBtn").click(function(){
+			console.log("修改认领");
+		});
+		$("#writeBtn").click(function(){
+			console.log("开始撰写哲学家生平/哲学观点/八卦/后世影响等等");
+		});
+	</script>
 </html>
