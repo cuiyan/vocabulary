@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <!-- <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen"> -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <link rel="stylesheet" type="text/css" href="stylesheets/simple-calendar.css">
+	
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>语法杂货铺</title>
+    <style>
+      #calendar{
+        width: 100%
+      }
+      .clearfix{
+        margin-bottom: 50px !important;
+      }
+      /* latin */
+		@font-face {
+		  font-family: 'Architects Daughter';
+		  font-style: normal;
+		  font-weight: 400;
+		  src: local('Architects Daughter Regular'), local('ArchitectsDaughter-Regular'), url(stylesheets/KtkxAKiDZI_td1Lkx62xHZHDtgO_Y-bvTYlg4-7jA-U.woff2) format('woff2');
+		  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+		}
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Grammer-Store</h1>
+        <h2>单词整理</h2>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+  <div class="inner clearfix">
+      <div id = 'calendar'>
+
+      </div>
+    </div>
+    <script type="text/javascript" src="javascripts/simple-calendar.js"></script>
+    <script>
+     var myCalendar = new SimpleCalendar('#calendar');
+     myCalendar.showLunarCalendar(false);
+     myCalendar.showFestival(false);
+     myCalendar.showSolarTerm(false);
+     myCalendar.showLunarFestival(false);
+     myCalendar.addMark('2018-4-16','Chloe');
+     myCalendar.addMark('2018-4-6','333');
+     /* myCalendar.showMark(true); */
+    </script>
+
+
+  </body>
+</html>

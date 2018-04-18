@@ -28,11 +28,19 @@ public class DigPhilosopherController {
 		return new ModelAndView("/table/claim-philosopher");
 	}
 	
+	@RequestMapping(value="table/modifyClaimAPhilosopher")
+	@ResponseBody
+	public ModelAndView modifyClaimAPhilosopher(Integer id) {
+		DBUserPhilosopher userp=digPhilosopherService.selectById(id);
+		return new ModelAndView("/table/claim-philosopher").addObject("userPhilosopher", userp);
+	}
+	
 	
 	@RequestMapping(value="/table/addUserAndPhilosopher")
 	@ResponseBody
 	public void addUserAndPhilosopher(DBUserPhilosopher userPhilosopher) {
-		digPhilosopherService.addUserAndPhilosopher(userPhilosopher);
+		
+		digPhilosopherService.addOrModifyUserAndPhilosopher(userPhilosopher);
 	}
 	@RequestMapping(value="/table/selectAll")
 	@ResponseBody

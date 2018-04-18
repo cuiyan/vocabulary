@@ -10,8 +10,14 @@
   <select id="selectAll" resultMap="BaseResultMap">
   	select id,philosopher_name,user_name from user_philosopher 
   </select>
+  <select id="selectById" parameterType="Integer" resultMap="BaseResultMap">
+  	select id,philosopher_name,user_name from user_philosopher where id=#{id}
+  </select>
   
   <insert id="addUserAndPhilosopher">
   	insert into user_philosopher(philosopher_name,user_name) values(#{philosopherName},#{userName});
   </insert>
+  <update id="modifyUserAndPhilosopher">
+  	update user_philosopher set philosopher_name=#{philosopherName},user_name=#{userName} where id=#{id}
+  </update>
 </mapper>

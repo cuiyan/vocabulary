@@ -17,8 +17,12 @@ public class DigPhilosopherService {
 	 * add the relationships
 	 * @param userPhilosopher
 	 */
-	public void addUserAndPhilosopher(DBUserPhilosopher userPhilosopher) {
-		userPhilosopherMapper.addUserAndPhilosopher(userPhilosopher);
+	public void addOrModifyUserAndPhilosopher(DBUserPhilosopher userPhilosopher) {
+		if(userPhilosopher.getId()!=null && userPhilosopher.getId()!=0) {
+			userPhilosopherMapper.modifyUserAndPhilosopher(userPhilosopher);
+		}else {
+			userPhilosopherMapper.addUserAndPhilosopher(userPhilosopher);
+		}
 	}
 	/**
 	 * select all relationships
@@ -27,4 +31,13 @@ public class DigPhilosopherService {
 	public List<DBUserPhilosopher> selectAll(){
 		return userPhilosopherMapper.selectAll();
 	}
+	/**
+	 * select all relationships
+	 * @return
+	 */
+	public DBUserPhilosopher selectById(Integer id){
+		return userPhilosopherMapper.selectById(id);
+	}
+	
+	
 }

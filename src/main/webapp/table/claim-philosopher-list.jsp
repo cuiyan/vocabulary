@@ -20,7 +20,7 @@
 		  <table class="table">
 		  	<thead>
 		  		<tr>
-		  			<td>编号</td><td>哲学家名称</td><td>认领人</td>
+		  			<td>编号</td><td>哲学家名称</td><td>认领人</td><td>操作</td>
 		  		</tr>
 		  	</thead>
 		    	<tbody>
@@ -30,14 +30,14 @@
 				   		<td>${userPhilosopher.philosopherName}</td>
 				   		<td>${userPhilosopher.userName}</td>
 				   		<td>
-				   			<button id="modifyBtn" userPhilosopherId="${userPhilosopher.id}">修改</button>
-				   			<button id="writeBtn" userPhilosopherId="${userPhilosopher.id}">写文章</button>
+				   			<button class="modifyBtn" userPhilosopherId="${userPhilosopher.id}">修改</button>
+				   			<button class="writeBtn" userPhilosopherId="${userPhilosopher.id}">写文章</button>
 				   		</td>
 				   </tr>
 				</c:forEach>
 		    	</tbody>
 		    	<tfoot>
-		    		<tr><td colspan="3"><a href="claimAPhilosopher"><button>我要认领</button></a></td></tr>
+		    		<tr><td colspan="4" class="text-center"><a href="claimAPhilosopher"><button>我要认领</button></a></td></tr>
 		    	</tfoot>
 		  </table>
 		</div>
@@ -46,11 +46,12 @@
 	<script src="../bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../js/lib/jquery.min.js"></script>
 	<script>
-		$("#modifyBtn").click(function(){
-			console.log("修改认领");
+		$(".modifyBtn").click(function(){
+			window.location.href = "modifyClaimAPhilosopher?id="+$(this).attr("userPhilosopherId");
 		});
-		$("#writeBtn").click(function(){
-			console.log("开始撰写哲学家生平/哲学观点/八卦/后世影响等等");
+		$(".writeBtn").click(function(){
+			alert("开始撰写哲学家生平/哲学观点/八卦/后世影响等等");
+			alert("敬请期待");
 		});
 	</script>
 </html>
