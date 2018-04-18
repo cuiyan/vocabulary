@@ -473,10 +473,11 @@ var SimpleCalendar = function () {
 
             var day = +v.querySelector('.day').innerHTML;
             if (day == 1) currentmonth++;
-
+            
             if (data[year + '-' + currentmonth + '-' + day]) {
               v.classList.add('sc-mark');
               v.title = data[year + '-' + currentmonth + '-' + day];
+              $(v).children().last().html(data[year + '-' + currentmonth + '-' + day]);//add by cuiyan 20170418
             } else {
               v.classList.remove('sc-mark');
               v.title = '';

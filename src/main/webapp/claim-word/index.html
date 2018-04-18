@@ -8,7 +8,8 @@
     <!-- <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen"> -->
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
     <link rel="stylesheet" type="text/css" href="stylesheets/simple-calendar.css">
-	
+    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
+
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -29,6 +30,7 @@
 		  src: local('Architects Daughter Regular'), local('ArchitectsDaughter-Regular'), url(stylesheets/KtkxAKiDZI_td1Lkx62xHZHDtgO_Y-bvTYlg4-7jA-U.woff2) format('woff2');
 		  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 		}
+		
     </style>
   </head>
 
@@ -41,20 +43,106 @@
     </header>
 
     <div id="content-wrapper">
-  <div class="inner clearfix">
-      <div id = 'calendar'>
+	  <div class="inner clearfix">
+	      <div id = 'calendar'>
+	
+	      </div>
+	    </div>
+    </div>
 
+	 <!-- 模态框 -->
+  <div class="modal fade" id="claim-word">
+    <div class="modal-dialog">
+      <div class="modal-content">
+   
+        <!-- 模态框头部 -->
+        <div class="modal-header">
+          <div class="modal-title" >语法杂货铺感谢您的贡献</div>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+   
+        <!-- 模态框主体 -->
+        <div class="modal-body">
+          <input type="text" class="form-control" id="userName" placeholder="您的昵称是...">
+          <div id="warn-message" style="font-size:8px;color:red;margin-left:5px;"></div>
+        </div>
+   
+        <!-- 模态框底部 -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" id="submitBtn" class="btn btn-primary">
+					提交更改
+				</button>
+        </div>
+   
       </div>
     </div>
+  </div>
     <script type="text/javascript" src="javascripts/simple-calendar.js"></script>
+    <script type="text/javascript" src="../js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+   <!--  <script type="text/javascript" src="../bootstrap/js/popper.min.js"></script> -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script>
-     var myCalendar = new SimpleCalendar('#calendar');
-     myCalendar.showLunarCalendar(false);
-     myCalendar.showFestival(false);
-     myCalendar.showSolarTerm(false);
-     myCalendar.showLunarFestival(false);
-     myCalendar.addMark('2018-4-16','Chloe');
-     myCalendar.addMark('2018-4-6','333');
+    var myCalendar = new SimpleCalendar('#calendar');
+ 	  myCalendar.showLunarCalendar(false);
+ 	  myCalendar.showFestival(false);
+ 	  myCalendar.showSolarTerm(false);
+ 	  myCalendar.showLunarFestival(false);
+    $(function(){
+    	
+  
+    	  var defaultMonth = myCalendar.container.querySelector('.sc-select-month').value;
+    	 	getDataByMonth(defaultMonth);
+    	  $(".sc-item").click(function(){
+      	 	$('#claim-word').modal('show');
+       });
+
+    	  $("#submitBtn").click(function(){
+    		  var date = myCalendar.getSelectedDay();
+    		  if($("#userName").val().trim()==""){
+    			  $("#warn-message").html("请输入您的昵称");
+    		  }else{
+    			  $.post("addUserWord", { userName: $("#userName").val().trim(), operateDate: timeStamp2String(date.getTime())},
+    			     function(data){
+    				  $('#claim-word').modal('hide');
+    				  getDataByMonth(defaultMonth);
+    			  });
+    		  }
+        	  console.log($("#userName").val());
+    	  });
+    });
+   
+    function timeStamp2String(time){
+        var datetime = new Date();
+        datetime.setTime(time);
+        var year = datetime.getFullYear();
+        var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+        var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+        var hour = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();
+        var minute = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+        var second = datetime.getSeconds()< 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+        return year + "-" + month + "-" + date;
+    }
+     
+    function getDataByMonth(defaultMonth){
+    	 $.ajax({
+  		   type: "GET",
+  		   url: "selectUserWordByMonth",
+  		   data: "monthNo="+defaultMonth,
+  		   success: function(data){
+  			   $.each( data, function(i, n){
+  				   //date
+  				   var day = n.operateDay;
+  				   var month = n.operateMonth;
+  				   var year = n.operateYear;
+  				   myCalendar.addMark(year+'-'+month+"-"+day,n.userName);
+  			  });
+  		   }
+  		});
+    }
+     
      /* myCalendar.showMark(true); */
     </script>
 

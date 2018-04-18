@@ -1,6 +1,7 @@
 package com.grammerstore.util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtil {
@@ -11,11 +12,35 @@ public class DateUtil {
 		return new Date().getTime();
 	}
 	public static void main(String[] args) throws ParseException {
-		System.out.println(parseLongToDateStr(Long.parseLong("1514289600000")));
-		System.out.println(DateUtil.getNowDate());
-		System.out.println(parseDate("2017-12-15 15:02:30",DateUtil.LONG_FORMATE));
-		
-		System.out.println(getDateDiffByMinutes("2017-12-19 14:02:30",new Date()));
+		System.out.println(getDayofMonth("2017-04-19"));
+	}
+	public static Integer getMonth(String date) {
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat sdf =	new SimpleDateFormat(DateUtil.SHORT_FORMATE);
+		try {
+			Date formatDate = sdf.parse(date);
+			calendar.setTime(formatDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return calendar.get( calendar.MONTH)+1;
+	}
+	
+	public static Integer getDayofMonth(String date) {
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat sdf =	new SimpleDateFormat(DateUtil.SHORT_FORMATE);
+		try {
+			Date formatDate = sdf.parse(date);
+			calendar.setTime(formatDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return calendar.get( calendar.DAY_OF_MONTH);
+	}
+	public static Integer getYear(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		return calendar.get( calendar.YEAR);
 	}
 	
 	public static String formateDate(Date date,String format) {
@@ -70,5 +95,4 @@ public class DateUtil {
 		}
 		return timestamp;
 	}
-
 }

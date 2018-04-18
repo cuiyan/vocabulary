@@ -62,7 +62,7 @@
   background-color: #FFEBEC;
 }
 .sc-mark{
-  background-color: #E5FBFA;
+  /* background-color: #E5FBFA; *//*delete by cuiyan 2017-418*/ 
 }
 .sc-vocation:before {
   content: '休';

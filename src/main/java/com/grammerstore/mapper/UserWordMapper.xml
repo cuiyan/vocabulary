@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grammerstore.mapper.UserWordMapper">
+  <resultMap id="BaseResultMap" type="com.grammerstore.entity.DBUserWord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="operate_day" jdbcType="INTEGER" property="operateDay" />
+    <result column="operate_month" jdbcType="INTEGER" property="operateMonth" />
+    <result column="operate_date" jdbcType="TIMESTAMP" property="operateDate" />
+  </resultMap>
+   <select id="selectUserWordByMonth" resultMap="BaseResultMap">
+   		select id,user_name,operate_day,operate_month,operate_date from user_word where operate_month=#{monthNo}
+   </select>
+   <insert id="addUserWord">
+   		insert into user_word(user_name,operate_day,operate_month,operate_date)
+   		values(#{userName},#{operateDay},#{operateMonth},#{operateDate})
+   </insert>
+</mapper>
