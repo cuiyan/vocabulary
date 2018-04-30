@@ -115,3 +115,14 @@ CREATE TABLE `vocabulary`.`user_philosopher` (
   `philosopher_name` VARCHAR(45) NULL,
   `user_name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  
+  -- 单词整理
+  DROP TABLE IF EXISTS `user_word`;
+  CREATE TABLE `vocabulary`.`user_word` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_name` VARCHAR(45) NULL,
+  `operate_day`  INT NULL,
+  `operate_month` INT NULL ,
+  `operate_date` DATETIME NULL,
+  PRIMARY KEY (`id`))ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+

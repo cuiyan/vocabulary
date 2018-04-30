@@ -1,5 +1,6 @@
 package com.grammerstore.entity;
 
+
 public class Vocabulary {
 	private Integer id;
 	/**
@@ -34,14 +35,12 @@ public class Vocabulary {
 	 * 中文解释
 	 */
 	private String chineseParaphrase;
-	
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
 	public Integer getTimetableId() {
 		return timetableId;
 	}
@@ -90,6 +89,7 @@ public class Vocabulary {
 	public void setChineseParaphrase(String chineseParaphrase) {
 		this.chineseParaphrase = chineseParaphrase;
 	}
+	
 	
 	
 }

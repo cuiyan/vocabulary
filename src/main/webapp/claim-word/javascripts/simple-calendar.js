@@ -320,11 +320,13 @@ var SimpleCalendar = function () {
     key: 'update',
     value: function update() {
       var month = arguments.length <= 0 || arguments[0] === undefined ? this.tmonth : arguments[0];
+     
       var year = arguments.length <= 1 || arguments[1] === undefined ? this.tyear : arguments[1];
 
       this.updateSize();
       this.updateWeek();
       this.addData(year, month);
+     
       this.updateHoliday(year, month);
       this.updateMark(year, month);
       this.updateFestival(year, month);
@@ -670,6 +672,7 @@ var SimpleCalendar = function () {
         }
         selectMonth.value = currentmonth;
         calendar.update(currentmonth, currentyear);
+//        this.getData( selectMonth.value);
       };
 
       var returntoday = container.querySelector('.sc-return-today');
@@ -678,15 +681,18 @@ var SimpleCalendar = function () {
         selectMonth.value = calendar.tmonth;
         calendar.update();
       };
+     
     }
 
     //添加标记
-
+  	
   }, {
     key: 'addMark',
     value: function addMark(day, info) {
       this._options.mark[day] = info;
-      this.update();
+      var selectYear = this.container.querySelector('.sc-select-year').value;
+      var selectMonth = this.container.querySelector('.sc-select-month').value;
+      this.update(selectMonth,selectYear);
     }
 
     //获取用户点击的日期
@@ -703,6 +709,17 @@ var SimpleCalendar = function () {
     //设置语言
 
   }, {
+	    key: 'getSelectedMonth',
+	    value: function getSelectedMonth() {
+	      var selectYear = this.container.querySelector('.sc-select-year').value;
+	      var selectMonth = this.container.querySelector('.sc-select-month').value;
+	      var selectDay = this.selectDay.querySelector('.day').innerHTML;
+	      return selectMonth;
+	    }
+
+	    //设置语言
+
+  },{
     key: 'setLenguage',
     value: function setLenguage(language) {
       this._options.language = language;
@@ -783,7 +800,31 @@ var SimpleCalendar = function () {
     //   console.log(this._options);
     // }
 
-  }]);
+  },{
+	  key:'getData',
+	  value:function getData(selectMonth){
+
+		    	 $.ajax({
+		  		   type: "GET",
+		  		   url: "selectUserWordByMonth",
+		  		   data: "monthNo="+selectMonth,
+		  		   success: function(data){
+		  			
+		  			   $.each( data, function(i, n){
+		  				
+		  				   //date
+		  				   var day = n.operateDay;
+		  				   var month = n.operateMonth;
+		  				   var year = n.operateYear;
+		  				   
+		  				   myCalendar.addMark(year+'-'+month+"-"+day,n.userName);
+		  			  });
+		  		   }
+		  		});
+		    }
+	  
+  }
+  ]);
 
   return SimpleCalendar;
 }();

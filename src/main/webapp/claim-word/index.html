@@ -107,11 +107,23 @@
     			  $.post("addUserWord", { userName: $("#userName").val().trim(), operateDate: timeStamp2String(date.getTime())},
     			     function(data){
     				  $('#claim-word').modal('hide');
-    				  getDataByMonth(defaultMonth);
+    				  alert(myCalendar.getSelectedMonth());
+    				  getDataByMonth( myCalendar.getSelectedMonth());
+    				/*   getDataByMonth( );  */
     			  });
     		  }
-        	  console.log($("#userName").val());
+        	  /* console.log($("#userName").val()); */
     	  });
+    	  $(".sc-select-month").change(function(){
+    		 getDataByMonth( myCalendar.container.querySelector('.sc-select-month').value); 
+    	  });
+    	  $('.sc-mleft').click(function(){
+    		  getDataByMonth( myCalendar.container.querySelector('.sc-select-month').value); 
+    	  });
+    	  $('.sc-mright').click(function(){
+    		  getDataByMonth( myCalendar.container.querySelector('.sc-select-month').value); 
+    	  });
+    	  
     });
    
     function timeStamp2String(time){
@@ -126,19 +138,22 @@
         return year + "-" + month + "-" + date;
     }
      
-    function getDataByMonth(defaultMonth){
+    function getDataByMonth(month){
+   /*  	myCalendar.update(); */
     	 $.ajax({
   		   type: "GET",
   		   url: "selectUserWordByMonth",
-  		   data: "monthNo="+defaultMonth,
+  		   data: "monthNo="+month,
   		   success: function(data){
-  			   $.each( data, function(i, n){
+  			
+  			    $.each( data, function(i, n){
+  				
   				   //date
   				   var day = n.operateDay;
   				   var month = n.operateMonth;
   				   var year = n.operateYear;
   				   myCalendar.addMark(year+'-'+month+"-"+day,n.userName);
-  			  });
+  			  }); 
   		   }
   		});
     }
